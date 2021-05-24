@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import edu.uw.myapplication.DittoApplication
@@ -29,16 +30,19 @@ class PokemonDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPokemonDetailBinding
     private val application by lazy { applicationContext as DittoApplication }
     private val dataRepository by lazy { application.dataRepository }
-    private var pokemonName: String? = "ditto"
+    private var pokemonName: String = "ditto"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityPokemonDetailBinding.inflate(layoutInflater).apply { setContentView(root) }
-        pokemonName = intent.getStringExtra(POKEMON_NAME_KEY)
+        intent.getStringExtra(POKEMON_NAME_KEY)?.let {
+            pokemonName = it
+        }
+        Log.i("wtf", pokemonName)
 
         lifecycleScope.launch {
-            val pokemon = dataRepository.getPokemon("ditto")
+            val pokemon = dataRepository.getPokemon(pokemonName)
             with (binding) {
                 pokemon.sprites.other.`official-artwork`?.front_default.let { ivPokemonArt.load(it) }
                 tvPokemonName.text = pokemon.forms[0].name
