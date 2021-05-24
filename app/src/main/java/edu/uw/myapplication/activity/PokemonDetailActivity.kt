@@ -39,8 +39,11 @@ class PokemonDetailActivity : AppCompatActivity() {
         intent.getStringExtra(POKEMON_NAME_KEY)?.let {
             pokemonName = it
         }
-        Log.i("wtf", pokemonName)
 
+        loadPokemonData()
+    }
+
+    private fun loadPokemonData() {
         lifecycleScope.launch {
             val pokemon = dataRepository.getPokemon(pokemonName)
             with (binding) {

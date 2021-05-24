@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         with(binding) {
             lifecycleScope.launch {
                 val randomPokemon = dataRepository.getPokemonList().results.random().name
-                Log.i("wtf", randomPokemon)
                 binding.btnNavigatePokemonDetail.setOnClickListener {
                     navigateToPokemonDetailActivity(this@MainActivity, randomPokemon)
                 }
