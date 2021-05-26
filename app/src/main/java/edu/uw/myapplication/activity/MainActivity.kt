@@ -22,6 +22,10 @@ class MainActivity : AppCompatActivity() {
         binding.btnRandomizePokemon.setOnClickListener { setPokemonDetailNavigation() }
         setPokemonDetailNavigation()
 
+        binding.btnNavigateProfileActivity.setOnClickListener{
+            navigateToProfileActivity(this@MainActivity)
+        }
+
     }
 
     private fun setPokemonDetailNavigation() {

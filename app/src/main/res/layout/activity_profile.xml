@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ProfileActivity">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="TRAINER"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:background="@color/gold"
+        android:layout_marginTop="35dp"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="Red"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+    <ImageView
+        android:id="@+id/ivProfileImage"
+        android:layout_width="350dp"
+        android:layout_height="250dp"
+        android:src="@drawable/trainer_ash"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etName" />
+
+    <ImageButton
+        android:id="@+id/ibChangeProfileImg"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_edit_24"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/ivProfileImage"
+        app:layout_constraintBottom_toBottomOf="@id/ivProfileImage" />
+
+    <TextView
+        android:id="@+id/tvIdNo"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="IDNo."
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_grey"
+        android:background="@drawable/rounded_text_view"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivProfileImage"
+        app:layout_constraintBottom_toTopOf="@id/tvRegion"/>
+
+    <TextView
+        android:id="@+id/tvIDNoValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1000"
+        android:textSize="20sp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="@id/tvIdNo"
+        app:layout_constraintTop_toTopOf="@id/tvIdNo"
+        app:layout_constraintBottom_toBottomOf="@id/tvIdNo" />
+
+    <TextView
+        android:id="@+id/tvRegion"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="REGION"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_grey"
+        android:background="@drawable/rounded_text_view"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvIdNo"
+        app:layout_constraintBottom_toTopOf="@id/tvScore"/>
+
+    <TextView
+        android:id="@+id/tvRegionValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kanto"
+        android:textSize="20sp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="@id/tvRegion"
+        app:layout_constraintTop_toTopOf="@id/tvRegion"
+        app:layout_constraintBottom_toBottomOf="@id/tvRegion" />
+
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:text="SCORE"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_grey"
+        android:background="@drawable/rounded_text_view"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvRegion"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/tvScoreValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="20sp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="@id/tvScore"
+        app:layout_constraintTop_toTopOf="@id/tvScore"
+        app:layout_constraintBottom_toBottomOf="@id/tvScore" />
+
+    <View
+        android:id="@+id/vChooseNewContainer"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="@drawable/rounded_text_view"
+        android:backgroundTint="@color/white"
+        android:elevation="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvChooseProfileImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose profile image"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_grey"
+        android:elevation="2dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="@id/vChooseNewContainer"
+        app:layout_constraintEnd_toEndOf="@id/vChooseNewContainer"
+        app:layout_constraintTop_toTopOf="@id/vChooseNewContainer"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/ibFirstImg"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:src="@drawable/trainer_ash"
+        android:background="@color/white"
+        app:layout_constraintDimensionRatio="1:1"
+        android:scaleType="fitCenter"
+        android:elevation="2dp"
+        app:layout_constraintStart_toStartOf="@id/vChooseNewContainer"
+        app:layout_constraintEnd_toStartOf="@+id/ibSecondImg"
+        app:layout_constraintTop_toTopOf="@id/vChooseNewContainer"
+        app:layout_constraintBottom_toBottomOf="@id/vChooseNewContainer"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/ibSecondImg"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:src="@drawable/trainer_brock"
+        android:background="@color/white"
+        app:layout_constraintDimensionRatio="1:1"
+        android:scaleType="fitCenter"
+        android:elevation="2dp"
+        app:layout_constraintStart_toEndOf="@id/ibFirstImg"
+        app:layout_constraintEnd_toEndOf="@id/vChooseNewContainer"
+        app:layout_constraintTop_toTopOf="@id/vChooseNewContainer"
+        app:layout_constraintBottom_toBottomOf="@id/vChooseNewContainer"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnApplyChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:textColor="@color/dark_grey"
+        android:backgroundTint="@color/gold"
+        android:elevation="2dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintStart_toStartOf="@id/vChooseNewContainer"
+        app:layout_constraintEnd_toEndOf="@id/vChooseNewContainer"
+        app:layout_constraintBottom_toBottomOf="@id/vChooseNewContainer"
+        android:visibility="gone" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<ImageButton-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:src="@drawable/ic_baseline_edit_24"-->
+<!--android:background="@color/white"-->
+<!--android:layout_marginRight="5dp"-->
+<!--app:layout_constraintEnd_toEndOf="@id/etName"-->
+<!--app:layout_constraintTop_toTopOf="@id/etName"-->
+<!--app:layout_constraintBottom_toBottomOf="@id/etName"/>-->
+
+<!--<ImageView-->
+<!--android:id="@+id/ivBadges1"-->
+<!--android:layout_width="175dp"-->
+<!--android:layout_height="50dp"-->
+<!--android:src="@drawable/kanto_badges"-->
+<!--app:layout_constraintTop_toBottomOf="@id/tvScore"-->
+<!--app:layout_constraintBottom_toBottomOf="parent"-->
+<!--app:layout_constraintStart_toStartOf="parent"-->
+<!--app:layout_constraintEnd_toStartOf="@id/ivBadges2" />-->
+
+<!--<ImageView-->
+<!--android:id="@+id/ivBadges2"-->
+<!--android:layout_width="175dp"-->
+<!--android:layout_height="50dp"-->
+<!--android:src="@drawable/kanto_badges2"-->
+<!--app:layout_constraintTop_toBottomOf="@id/tvScore"-->
+<!--app:layout_constraintBottom_toBottomOf="parent"-->
+<!--app:layout_constraintStart_toEndOf="@id/ivBadges1"-->
+<!--app:layout_constraintEnd_toEndOf="parent" />-->
