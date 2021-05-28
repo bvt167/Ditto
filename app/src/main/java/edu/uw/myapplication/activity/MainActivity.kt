@@ -31,6 +31,10 @@ class MainActivity : AppCompatActivity() {
                 binding.btnNavigatePokemonDetail.setOnClickListener {
                     navigateToPokemonDetailActivity(this@MainActivity, randomPokemon)
                 }
+
+                binding.guessBtn.setOnClickListener {
+                    navigateToGuessingGameActivity(this@MainActivity)
+                }
             }
         }
     }
