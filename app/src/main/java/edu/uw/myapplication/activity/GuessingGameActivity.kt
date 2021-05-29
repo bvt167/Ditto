@@ -30,7 +30,9 @@ class GuessingGameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityGuessingGameBinding
     private val application by lazy { applicationContext as DittoApplication }
     private val dataRepository by lazy { application.dataRepository }
-
+    private var numberCorrect: Int = 0
+    private var currentRound: Int = 1
+    private val totalNumRounds: Int = 5
     private lateinit var correctAnswer: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,25 +48,69 @@ class GuessingGameActivity : AppCompatActivity() {
         }
     }
 
+    fun resetGame() {
+        with (binding) {
+            tvGameResults.setText("")
+            tvGameResults.visibility = View.GONE
+            playAgainBtn.visibility = View.GONE
+        }
+
+        numberCorrect = 0
+        currentRound = 1
+        resetQuestion()
+    }
+
     fun beginGame() {
-        with(binding) {
+        with (binding) {
             tvGameTitle.visibility = View.GONE
             startGameBtn.visibility = View.GONE
             nextQuestionBtn.visibility = View.GONE
             pokemonName.visibility = View.GONE
+        }
+        resetQuestion()
+    }
 
-            setUpQuestion()
+    fun showGameResults() {
+        with (binding) {
+            tvGameResults.setText("You scored a ${numberCorrect} out of ${totalNumRounds}!")
+            tvGameResults.visibility = View.VISIBLE
+            playAgainBtn.visibility = View.VISIBLE
 
-            descHintTv.visibility = View.VISIBLE
-            idHintTv.visibility = View.VISIBLE
-            pkmnSprite.visibility = View.INVISIBLE
-            userGuessInput.visibility = View.VISIBLE
-            makeGuessBtn.visibility = View.VISIBLE
+            nextQuestionBtn.visibility = View.GONE
+            pokemonName.visibility = View.GONE
+            pokemonName.text = ""
 
-            makeGuessBtn.setOnClickListener {
-                checkUserGuess()
+            descHintTv.visibility = View.GONE
+            idHintTv.visibility = View.GONE
+            pkmnSprite.visibility = View.GONE
+            playAgainBtn.setOnClickListener {
+                resetGame()
             }
         }
+    }
+
+    fun resetQuestion() {
+        if (currentRound > totalNumRounds) {
+            showGameResults()
+        } else {
+            with(binding) {
+                setUpQuestion()
+                nextQuestionBtn.visibility = View.GONE
+                pokemonName.visibility = View.INVISIBLE
+                pokemonName.text = ""
+
+                descHintTv.visibility = View.VISIBLE
+                idHintTv.visibility = View.VISIBLE
+                pkmnSprite.visibility = View.INVISIBLE
+                userGuessInput.visibility = View.VISIBLE
+                makeGuessBtn.visibility = View.VISIBLE
+
+                makeGuessBtn.setOnClickListener {
+                    checkUserGuess()
+                }
+            }
+        }
+
     }
 
     fun checkUserGuess() {
@@ -80,10 +126,11 @@ class GuessingGameActivity : AppCompatActivity() {
             Log.i("PokeHint", input)
             if (input == correctAnswer) {
                 Log.i("PokeHint", "Correct Answer!")
-                Toast.makeText(this@GuessingGameActivity, "Correct Answer", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@GuessingGameActivity, "Correct!", Toast.LENGTH_SHORT).show()
+                numberCorrect++
             } else {
                 Log.i("PokeHint", "Incorrect Answer!")
-                Toast.makeText(this@GuessingGameActivity, "Incorrect Answer", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@GuessingGameActivity, "Incorrect!", Toast.LENGTH_SHORT).show()
             }
             val pkmnName = correctAnswer.replaceFirstChar {
                 if (it.isLowerCase()) it.titlecase(
@@ -94,7 +141,8 @@ class GuessingGameActivity : AppCompatActivity() {
             pokemonName.text = pkmnName
             nextQuestionBtn.visibility = View.VISIBLE
             nextQuestionBtn.setOnClickListener {
-                beginGame()
+                currentRound++
+                resetQuestion()
             }
         }
     }
