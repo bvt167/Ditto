@@ -6,16 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.GuessingGameActivity">
 
-    <TextView
-        android:id="@+id/idHintTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pokedex Number"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/descHintTv"
-        app:layout_constraintBottom_toTopOf="@+id/userGuessInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+
 
     <TextView
         android:id="@+id/tvGameTitle"
@@ -23,22 +14,32 @@
         android:layout_height="wrap_content"
         android:text="Who's that Pokemon?"
         android:textSize="36dp"
-        app:layout_constraintBottom_toTopOf="@id/pkmnSprite"
+        app:layout_constraintBottom_toTopOf="@id/tvGameInstructions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvGameResults"
+        android:id="@+id/tvGameInstructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="You got 5 out of 5"
-        android:textSize="36dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/pkmnSprite"
+        android:text="Test your Pokemon knowledge with a quick guessing game. Given the hints, type in the mystery Pokemon's name and score!"
+        android:textSize="24dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@id/startGameBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/startGameBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGameInstructions"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/pkmnSprite"
@@ -51,30 +52,16 @@
         app:layout_constraintTop_toBottomOf="@+id/tvGameTitle"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <Button
-        android:id="@+id/makeGuessBtn"
+    <TextView
+        android:id="@+id/pokemonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit Answer"
+        android:text="Pokemon Name"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/startGameBtn"
+        app:layout_constraintTop_toBottomOf="@id/pkmnSprite"
+        app:layout_constraintBottom_toTopOf="@+id/descHintTv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userGuessInput" />
-
-    <EditText
-        android:id="@+id/userGuessInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Enter your guess"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/makeGuessBtn"
-        app:layout_constraintTop_toBottomOf="@id/idHintTv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="444dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/descHintTv"
@@ -91,21 +78,46 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/pokemonName"
+        android:id="@+id/idHintTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pokemon Name"
+        android:text="Pokedex Number"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/pkmnSprite"
-        app:layout_constraintBottom_toTopOf="@+id/descHintTv"
+        app:layout_constraintTop_toBottomOf="@id/descHintTv"
+        app:layout_constraintBottom_toTopOf="@+id/userGuessInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/userGuessInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Enter your guess"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/makeGuessBtn"
+        app:layout_constraintTop_toBottomOf="@id/idHintTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="444dp" />
+
+    <Button
+        android:id="@+id/makeGuessBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit Answer"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userGuessInput" />
 
     <Button
         android:id="@+id/nextQuestionBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next Question"
+        android:text="Next"
         android:visibility="gone"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -113,15 +125,18 @@
         app:layout_constraintTop_toBottomOf="@+id/idHintTv"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/startGameBtn"
+    <TextView
+        android:id="@+id/tvGameResults"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="You got 5 out of 5"
+        android:textSize="36dp"
+        android:visibility="gone"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/playAgainBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/makeGuessBtn"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/playAgainBtn"

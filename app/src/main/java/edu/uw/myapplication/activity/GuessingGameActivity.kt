@@ -63,6 +63,7 @@ class GuessingGameActivity : AppCompatActivity() {
     fun beginGame() {
         with (binding) {
             tvGameTitle.visibility = View.GONE
+            tvGameInstructions.visibility = View.GONE
             startGameBtn.visibility = View.GONE
             nextQuestionBtn.visibility = View.GONE
             pokemonName.visibility = View.GONE
@@ -116,7 +117,9 @@ class GuessingGameActivity : AppCompatActivity() {
     fun checkUserGuess() {
         with(binding) {
             userGuessInput.visibility = View.INVISIBLE
-
+            var descHintTvText = descHintTv.text.toString()
+            descHintTvText = descHintTvText.replace("?", correctAnswer, true) // unclassifies pkmn name in description
+            descHintTv.text = descHintTvText
             pkmnSprite.visibility = View.VISIBLE
             var input = userGuessInput.text.toString()
             input = input.lowercase().trim()
@@ -161,7 +164,7 @@ class GuessingGameActivity : AppCompatActivity() {
                     var pkmnID = pokemon.id
                     var hintFlavorText = hints.flavor_text_entries[langIndex].flavor_text
                     hintFlavorText = hintFlavorText.replace("\\n".toRegex(), " ") // removes new lines
-                    hintFlavorText = hintFlavorText.replace(pokemon.name, "?", true) // removes pokemon name in case it's in the flavor text string
+                    hintFlavorText = hintFlavorText.replace(correctAnswer, "?", true) // removes pokemon name in case it's in the flavor text string
                     descHintTv.text = hintFlavorText
                     idHintTv.text = "Pokedex Number: " + pkmnID
                     Log.i("PokeHint", hints.flavor_text_entries[langIndex].flavor_text)
