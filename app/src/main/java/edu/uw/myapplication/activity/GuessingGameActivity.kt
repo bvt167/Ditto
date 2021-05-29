@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import edu.uw.myapplication.DittoApplication
@@ -14,6 +16,7 @@ import edu.uw.myapplication.databinding.ActivityMainBinding
 import edu.uw.myapplication.databinding.ActivityPokemonDetailBinding
 import edu.uw.myapplication.model.Species
 import kotlinx.coroutines.launch
+import java.util.*
 
 val PREFERED_LANGUAGE_KEY = "en"
 
@@ -28,6 +31,8 @@ class GuessingGameActivity : AppCompatActivity() {
     private val application by lazy { applicationContext as DittoApplication }
     private val dataRepository by lazy { application.dataRepository }
 
+    private lateinit var correctAnswer: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_guessing_game)
@@ -36,28 +41,84 @@ class GuessingGameActivity : AppCompatActivity() {
 
         with(binding) {
             startGameBtn.setOnClickListener{
-                setUpQuestion()
+                beginGame()
+            }
+        }
+    }
+
+    fun beginGame() {
+        with(binding) {
+            tvGameTitle.visibility = View.GONE
+            startGameBtn.visibility = View.GONE
+            nextQuestionBtn.visibility = View.GONE
+            pokemonName.visibility = View.GONE
+
+            setUpQuestion()
+
+            descHintTv.visibility = View.VISIBLE
+            idHintTv.visibility = View.VISIBLE
+            pkmnSprite.visibility = View.INVISIBLE
+            userGuessInput.visibility = View.VISIBLE
+            makeGuessBtn.visibility = View.VISIBLE
+
+            makeGuessBtn.setOnClickListener {
+                checkUserGuess()
+            }
+        }
+    }
+
+    fun checkUserGuess() {
+        with(binding) {
+            userGuessInput.visibility = View.INVISIBLE
+
+            pkmnSprite.visibility = View.VISIBLE
+            var input = userGuessInput.text.toString()
+            input = input.lowercase().trim()
+
+            userGuessInput.setText("")
+            makeGuessBtn.visibility = View.GONE
+            Log.i("PokeHint", input)
+            if (input == correctAnswer) {
+                Log.i("PokeHint", "Correct Answer!")
+                Toast.makeText(this@GuessingGameActivity, "Correct Answer", Toast.LENGTH_SHORT).show()
+            } else {
+                Log.i("PokeHint", "Incorrect Answer!")
+                Toast.makeText(this@GuessingGameActivity, "Incorrect Answer", Toast.LENGTH_SHORT).show()
+            }
+            val pkmnName = correctAnswer.replaceFirstChar {
+                if (it.isLowerCase()) it.titlecase(
+                    Locale.getDefault()
+                ) else it.toString()
+            }
+            pokemonName.visibility = View.VISIBLE
+            pokemonName.text = pkmnName
+            nextQuestionBtn.visibility = View.VISIBLE
+            nextQuestionBtn.setOnClickListener {
+                beginGame()
             }
         }
     }
 
     fun setUpQuestion() {
         with(binding) {
-            lifecycleScope.launch {
-                val randomPokemonName = dataRepository.getPokemonList().results.random().name
-                val pokemon = dataRepository.getPokemon(randomPokemonName)
-                Log.i("PokeHint", "ID: ${pokemon.name}, Name: ${pokemon.name}")
-                val hints = dataRepository.getPokemonHint(randomPokemonName)
-
-                var langIndex = findLangFlavorText(hints)
-
-                var hintFlavorText = hints.flavor_text_entries[langIndex].flavor_text
-                hintFlavorText = hintFlavorText.replace("\\n".toRegex(), "") // removes new lines
-                hintFlavorText = hintFlavorText.replace(pokemon.name, "?", true) // removes pokemon name in case it's in the flavor text string
-                descHintTv.text = hintFlavorText
-                Log.i("PokeHint", hints.flavor_text_entries[langIndex].flavor_text)
-                pokemon.sprites.other.`official-artwork`?.front_default.let { pkmnSprite.load(it) }
-            }
+            descHintTv.text = ""
+            idHintTv.text = ""
+                lifecycleScope.launch {
+                    val randomPokemonName = dataRepository.getPokemonList().results.random().name
+                    val pokemon = dataRepository.getPokemon(randomPokemonName)
+                    Log.i("PokeHint", "ID: ${pokemon.name}, Name: ${pokemon.name}")
+                    val hints = dataRepository.getPokemonHint(randomPokemonName)
+                    correctAnswer = pokemon.name
+                    var langIndex = findLangFlavorText(hints)
+                    var pkmnID = pokemon.id
+                    var hintFlavorText = hints.flavor_text_entries[langIndex].flavor_text
+                    hintFlavorText = hintFlavorText.replace("\\n".toRegex(), " ") // removes new lines
+                    hintFlavorText = hintFlavorText.replace(pokemon.name, "?", true) // removes pokemon name in case it's in the flavor text string
+                    descHintTv.text = hintFlavorText
+                    idHintTv.text = "Pokedex Number: " + pkmnID
+                    Log.i("PokeHint", hints.flavor_text_entries[langIndex].flavor_text)
+                    pokemon.sprites.other.`official-artwork`?.front_default.let { pkmnSprite.load(it) }
+                }
         }
     }
 

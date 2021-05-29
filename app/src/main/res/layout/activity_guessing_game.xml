@@ -7,12 +7,13 @@
     tools:context=".activity.GuessingGameActivity">
 
     <TextView
-        android:id="@+id/typeHintTv"
+        android:id="@+id/idHintTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hint 2"
+        android:text="Pokedex Number"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/descHintTv"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/userGuessInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -34,6 +35,7 @@
         app:layout_constraintBottom_toTopOf="@+id/descHintTv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/tvGameTitle"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -41,34 +43,62 @@
         android:id="@+id/makeGuessBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="Submit Answer"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/startGameBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/userGuessInput" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/userGuessInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Guess"
+        android:hint="Enter your guess"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/makeGuessBtn"
-        app:layout_constraintTop_toBottomOf="@id/typeHintTv"
+        app:layout_constraintTop_toBottomOf="@id/idHintTv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="444dp" />
 
     <TextView
         android:id="@+id/descHintTv"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="36dp"
+        android:text="Pokemon Description"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/pokemonName"
+        app:layout_constraintBottom_toTopOf="@+id/idHintTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/pokemonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:text="Hint 1"
+        android:text="Pokemon Name"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/pkmnSprite"
-        app:layout_constraintBottom_toTopOf="@+id/typeHintTv"
+        app:layout_constraintBottom_toTopOf="@+id/descHintTv"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/nextQuestionBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next Question"
+        android:visibility="gone"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idHintTv"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
