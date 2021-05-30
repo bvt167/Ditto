@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import edu.uw.myapplication.DittoApplication
+import edu.uw.myapplication.adapter.PokeListAdapter
 import edu.uw.myapplication.databinding.ActivityMainBinding
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,18 +21,23 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater).apply { setContentView(root) }
 
-        binding.btnRandomizePokemon.setOnClickListener { setPokemonDetailNavigation() }
-        setPokemonDetailNavigation()
+        with(binding){
+            val list = runBlocking { dataRepository.getPokemonList() }
+            val adapter = PokeListAdapter(list)
+
+            fullPokeList.adapter = adapter
+
+            adapter.onPokemonClickListener = { name ->
+                setPokemonDetailNavigation(name)
+            }
+        }
 
     }
 
-    private fun setPokemonDetailNavigation() {
+    private fun setPokemonDetailNavigation(name: String) {
         with(binding) {
             lifecycleScope.launch {
-                val randomPokemon = dataRepository.getPokemonList().results.random().name
-                binding.btnNavigatePokemonDetail.setOnClickListener {
-                    navigateToPokemonDetailActivity(this@MainActivity, randomPokemon)
-                }
+               navigateToPokemonDetailActivity(this@MainActivity, name)
             }
         }
     }
