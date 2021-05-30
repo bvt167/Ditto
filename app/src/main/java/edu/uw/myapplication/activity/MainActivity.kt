@@ -2,7 +2,6 @@ package edu.uw.myapplication.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import edu.uw.myapplication.DittoApplication
 import edu.uw.myapplication.adapter.PokeListAdapter
@@ -28,17 +27,11 @@ class MainActivity : AppCompatActivity() {
             fullPokeList.adapter = adapter
 
             adapter.onPokemonClickListener = { name ->
-                setPokemonDetailNavigation(name)
+                lifecycleScope.launch {
+                    navigateToPokemonDetailActivity(this@MainActivity, name)
+                }
             }
         }
 
-    }
-
-    private fun setPokemonDetailNavigation(name: String) {
-        with(binding) {
-            lifecycleScope.launch {
-               navigateToPokemonDetailActivity(this@MainActivity, name)
-            }
-        }
     }
 }
