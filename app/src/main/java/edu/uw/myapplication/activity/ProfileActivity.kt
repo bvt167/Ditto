@@ -23,7 +23,8 @@ class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
     private val application by lazy { applicationContext as DittoApplication }
-    val idValue = Random.nextInt(1001) + 1000
+    private val idValue = Random.nextInt(1001) + 1000
+    private var selectedImgVal = "first"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,20 +53,24 @@ class ProfileActivity : AppCompatActivity() {
     private fun selectImg(binding: ActivityProfileBinding, selected: String) {
         with(binding) {
 
-            var firstElevation = if (selected == "first") 10F else 2F
-            var secondElevation = if (selected == "second") 10F else 2F
 
-            ibFirstImg.elevation = firstElevation
-            ibSecondImg.elevation = secondElevation
+            selectedImgVal = if (selected == "first") "first" else "second"
+            var firstBackground = if (selected == "first") R.drawable.rounded_corners else R.color.white
+            var secondBackground = if (selected == "second") R.drawable.rounded_corners else R.color.white
+
+            ibFirstImg.setBackgroundResource(firstBackground)
+            ibSecondImg.setBackgroundResource(secondBackground)
         }
     }
 
     private fun closeSelect(binding: ActivityProfileBinding) {
         with(binding) {
 
-            var newProfileImg = if (ibFirstImg.elevation > 2F) {
+            var newProfileImg = if (selectedImgVal == "first") {
+                Log.i("ProfileActivity", "First image is selected")
                 R.drawable.trainer_ash
             } else {
+                Log.i("ProfileActivity", "Second image is selected")
                 R.drawable.trainer_brock
             }
 
