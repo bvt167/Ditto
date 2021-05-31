@@ -15,4 +15,7 @@
     <string name="profile_score">SCORE</string>
     <string name="choose_profile">Choose profile image</string>
     <string name="done">Done</string>
+
+    <!-- Action Buttons -->
+    <string name="action_profile">Profile</string>
 </resources>
