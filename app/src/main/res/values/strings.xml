@@ -2,4 +2,6 @@
     <string name="app_name">Ditto</string>
     <string name="dimension_ratio_square">1:1</string>
     <string name="pokemon_artwork_description">Pokemon Artwork</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

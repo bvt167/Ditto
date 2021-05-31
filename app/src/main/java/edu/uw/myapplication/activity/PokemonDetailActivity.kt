@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import coil.load
 import edu.uw.myapplication.DittoApplication
+import edu.uw.myapplication.NavGraphDirections
 import edu.uw.myapplication.R
 import edu.uw.myapplication.databinding.ActivityPokemonDetailBinding
 import edu.uw.myapplication.repository.DataRepository
@@ -31,6 +33,7 @@ class PokemonDetailActivity : AppCompatActivity() {
     private val application by lazy { applicationContext as DittoApplication }
     private val dataRepository by lazy { application.dataRepository }
     private var pokemonName: String = "ditto"
+    private val navController by lazy { findNavController(R.id.navHost) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +51,10 @@ class PokemonDetailActivity : AppCompatActivity() {
             val pokemon = dataRepository.getPokemon(pokemonName)
             with (binding) {
                 pokemon.sprites.other.`official-artwork`?.front_default.let { ivPokemonArt.load(it) }
-                tvPokemonName.text = pokemon.forms[0].name
+                tvPokemonName.text = capitalizeWords(pokemon.forms[0].name)
             }
         }
     }
+
+    private fun capitalizeWords(s: String): String = s.split(" ").joinToString { it.replaceFirstChar { it.uppercaseChar() } }
 }
