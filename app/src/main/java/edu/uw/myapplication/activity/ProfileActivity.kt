@@ -33,6 +33,7 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater).apply { setContentView(root) }
         with(binding) {
             ibChangeProfileImg.setOnClickListener{ changeProfileImg(binding) }
+            tvIDNoValue.text = idValue.toString()
         }
     }
 
@@ -52,7 +53,6 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun selectImg(binding: ActivityProfileBinding, selected: String) {
         with(binding) {
-
 
             selectedImgVal = if (selected == "first") "first" else "second"
             var firstBackground = if (selected == "first") R.drawable.rounded_corners else R.color.white
