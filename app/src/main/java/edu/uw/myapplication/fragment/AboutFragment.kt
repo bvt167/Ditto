@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import edu.uw.myapplication.BuildConfig
 import edu.uw.myapplication.databinding.FragmentAboutBinding
 
 class AboutFragment : Fragment() {
@@ -15,7 +16,9 @@ class AboutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentAboutBinding.inflate(layoutInflater)
-
+        with(binding) {
+            version.text = BuildConfig.VERSION_NAME
+        }
         return binding.root
     }
 }
