@@ -10,5 +10,7 @@ data class Pokemon(
     val height: Int,
     val weight: Int,
     val forms: List<Form>,
-    val sprites: Sprites
+    val abilities: List<AbilityEntry>,
+    val sprites: Sprites,
+    val types: List<TypeEntry>
 ): Parcelable

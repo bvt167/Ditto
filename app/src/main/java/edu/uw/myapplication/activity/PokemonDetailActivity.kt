@@ -12,6 +12,7 @@ import edu.uw.myapplication.DittoApplication
 import edu.uw.myapplication.NavGraphDirections
 import edu.uw.myapplication.R
 import edu.uw.myapplication.databinding.ActivityPokemonDetailBinding
+import edu.uw.myapplication.model.Pokemon
 import edu.uw.myapplication.repository.DataRepository
 import kotlinx.coroutines.launch
 
@@ -49,9 +50,31 @@ class PokemonDetailActivity : AppCompatActivity() {
     private fun loadPokemonData() {
         lifecycleScope.launch {
             val pokemon = dataRepository.getPokemon(pokemonName)
-            with (binding) {
+            navController.navigate(NavGraphDirections.actionGlobalAboutFragment(pokemon))
+            setFragmentNavigation(pokemon)
+            with(binding) {
                 pokemon.sprites.other.`official-artwork`?.front_default.let { ivPokemonArt.load(it) }
                 tvPokemonName.text = capitalizeWords(pokemon.forms[0].name)
+            }
+        }
+    }
+
+    private fun setFragmentNavigation(pokemon: Pokemon) {
+        with(binding) {
+            rbAbout.setOnClickListener {
+                navController.navigate(NavGraphDirections.actionGlobalAboutFragment(pokemon))
+            }
+
+            rbStats.setOnClickListener {
+                navController.navigate(NavGraphDirections.actionGlobalStatsFragment(pokemon))
+            }
+
+            rbEvolutions.setOnClickListener {
+                navController.navigate(NavGraphDirections.actionGlobalEvolutionsFragment(pokemon))
+            }
+
+            rbMoves.setOnClickListener {
+                navController.navigate(NavGraphDirections.actionGlobalMovesFragment(pokemon))
             }
         }
     }
