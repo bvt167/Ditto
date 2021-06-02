@@ -8,10 +8,12 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import edu.uw.myapplication.DittoApplication
 import edu.uw.myapplication.NavGraphDirections
 import edu.uw.myapplication.R
+import edu.uw.myapplication.adapter.TypeRecyclerAdapter
 import edu.uw.myapplication.databinding.ActivityPokemonDetailBinding
 import edu.uw.myapplication.model.Pokemon
 import edu.uw.myapplication.repository.DataRepository
@@ -63,6 +65,9 @@ class PokemonDetailActivity : AppCompatActivity() {
                 pokemon.sprites.other.`official-artwork`?.front_default.let { ivPokemonArt.load(it) }
                 tvPokemonName.text = capitalizeWords(pokemon.forms[0].name)
                 clContainer.setBackgroundColor(application.getTypeColorByName(pokemon.types.first().type.name))
+                rvTypes.layoutManager = LinearLayoutManager(this@PokemonDetailActivity, LinearLayoutManager.HORIZONTAL, false)
+                val adapter = TypeRecyclerAdapter(pokemon.types, application)
+                rvTypes.adapter = adapter
             }
         }
     }
