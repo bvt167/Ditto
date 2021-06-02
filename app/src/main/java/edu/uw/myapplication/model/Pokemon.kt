@@ -12,5 +12,6 @@ data class Pokemon(
     val forms: List<Form>,
     val abilities: List<AbilityEntry>,
     val sprites: Sprites,
+    val stats: List<StatEntry>,
     val types: List<TypeEntry>
 ): Parcelable

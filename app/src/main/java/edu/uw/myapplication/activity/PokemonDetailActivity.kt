@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import coil.load
@@ -38,6 +39,7 @@ class PokemonDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding = ActivityPokemonDetailBinding.inflate(layoutInflater).apply { setContentView(root) }
         intent.getStringExtra(POKEMON_NAME_KEY)?.let {
@@ -45,6 +47,11 @@ class PokemonDetailActivity : AppCompatActivity() {
         }
 
         loadPokemonData()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
     }
 
     private fun loadPokemonData() {
@@ -80,4 +87,5 @@ class PokemonDetailActivity : AppCompatActivity() {
     }
 
     private fun capitalizeWords(s: String): String = s.split(" ").joinToString { it.replaceFirstChar { it.uppercaseChar() } }
+
 }

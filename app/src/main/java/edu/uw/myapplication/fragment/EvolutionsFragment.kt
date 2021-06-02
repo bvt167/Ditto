@@ -6,15 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import edu.uw.myapplication.databinding.FragmentEvolutionsBinding
+import edu.uw.myapplication.databinding.FragmentStatsBinding
 
 class EvolutionsFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val binding = FragmentEvolutionsBinding.inflate(layoutInflater)
+    private lateinit var binding: FragmentEvolutionsBinding
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentEvolutionsBinding.inflate(layoutInflater)
 
         return binding.root
     }

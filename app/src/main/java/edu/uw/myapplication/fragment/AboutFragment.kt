@@ -40,7 +40,7 @@ class AboutFragment : Fragment() {
                     tvFlavorText.text = getLatestEnglishFlavorText(pokemonSpecies.flavor_text_entries)
                     tvHeight.text = (pokemon.height * 10).toString() + " cm"
                     tvWeight.text = (pokemon.weight / 10.0).round(3).toString() + " kg"
-                    tvAbilities.text = pokemon.abilities.joinToString { it.ability.name }
+                    tvAbilities.text = capitalizeWords(pokemon.abilities.joinToString { it.ability.name })
                 }
             }
         }
@@ -57,4 +57,6 @@ class AboutFragment : Fragment() {
         repeat(decimals) { multiplier *= 10 }
         return round(this * multiplier) / multiplier
     }
+
+    private fun capitalizeWords(s: String): String = s.split(", ").joinToString { it.replaceFirstChar { it.uppercaseChar() } }
 }
