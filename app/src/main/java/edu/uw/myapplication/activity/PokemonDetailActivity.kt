@@ -62,6 +62,7 @@ class PokemonDetailActivity : AppCompatActivity() {
             with(binding) {
                 pokemon.sprites.other.`official-artwork`?.front_default.let { ivPokemonArt.load(it) }
                 tvPokemonName.text = capitalizeWords(pokemon.forms[0].name)
+                clContainer.setBackgroundColor(application.getTypeColorByName(pokemon.types.first().type.name))
             }
         }
     }

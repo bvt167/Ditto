@@ -6,8 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.PokemonDetailActivity"
-    android:background="@color/normal">
+    tools:context=".activity.PokemonDetailActivity">
     
     <ImageView
         android:id="@+id/ivPokemonArt"
