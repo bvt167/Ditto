@@ -3,7 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/aboutFragment">
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="edu.uw.myapplication.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/aboutFragment"
@@ -14,9 +24,6 @@
             android:name="pokemon"
             app:argType="edu.uw.myapplication.model.Pokemon" />
     </fragment>
-    <action
-        android:id="@+id/action_global_aboutFragment"
-        app:destination="@id/aboutFragment" />
     <fragment
         android:id="@+id/statsFragment"
         android:name="edu.uw.myapplication.StatsFragment"
@@ -44,13 +51,4 @@
             android:name="pokemon"
             app:argType="edu.uw.myapplication.model.Pokemon" />
     </fragment>
-    <action
-        android:id="@+id/action_global_statsFragment"
-        app:destination="@id/statsFragment" />
-    <action
-        android:id="@+id/action_global_evolutionsFragment"
-        app:destination="@id/evolutionsFragment" />
-    <action
-        android:id="@+id/action_global_movesFragment"
-        app:destination="@id/movesFragment" />
 </navigation>

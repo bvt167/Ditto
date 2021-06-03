@@ -9,7 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import coil.load
 import edu.uw.myapplication.DittoApplication
-import edu.uw.myapplication.NavGraphDirections
 import edu.uw.myapplication.R
 import edu.uw.myapplication.databinding.ActivityPokemonDetailBinding
 import edu.uw.myapplication.repository.DataRepository

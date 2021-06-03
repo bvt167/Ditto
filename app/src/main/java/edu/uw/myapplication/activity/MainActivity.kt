@@ -35,13 +35,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setAboutNavigation() {
-        with(binding) {
-            lifecycleScope.launch {
-                binding.btnAbout.setOnClickListener {
-                    //navigateToAbout(this@MainActivity)
-                }
-            }
-        }
-    }
 }
