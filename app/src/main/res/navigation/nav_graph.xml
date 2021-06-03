@@ -36,6 +36,12 @@
         <argument
             android:name="pokemon"
             app:argType="edu.uw.myapplication.model.Pokemon" />
+        <argument
+            android:name="evolutionList"
+            app:argType="edu.uw.myapplication.model.EvolutionList" />
+        <argument
+            android:name="evolutionChain"
+            app:argType="edu.uw.myapplication.model.EvolutionChain" />
     </fragment>
     <fragment
         android:id="@+id/movesFragment"
@@ -50,9 +56,9 @@
         android:id="@+id/action_global_statsFragment"
         app:destination="@id/statsFragment" />
     <action
-        android:id="@+id/action_global_evolutionsFragment"
-        app:destination="@id/evolutionsFragment" />
-    <action
         android:id="@+id/action_global_movesFragment"
         app:destination="@id/movesFragment" />
+    <action
+        android:id="@+id/action_global_evolutionsFragment"
+        app:destination="@id/evolutionsFragment" />
 </navigation>

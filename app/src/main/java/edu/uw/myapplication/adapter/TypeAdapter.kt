@@ -1,7 +1,6 @@
 package edu.uw.myapplication.adapter
 
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.ShapeDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +10,7 @@ import edu.uw.myapplication.databinding.ItemTypeBinding
 import edu.uw.myapplication.model.TypeEntry
 import java.util.*
 
-class TypeRecyclerAdapter(private val types: List<TypeEntry>, private val application: DittoApplication): RecyclerView.Adapter<TypeRecyclerAdapter.TypeListViewHolder>() {
+class TypeAdapter(private val types: List<TypeEntry>, private val application: DittoApplication): RecyclerView.Adapter<TypeAdapter.TypeListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TypeListViewHolder {
         val binding = ItemTypeBinding.inflate(LayoutInflater.from(parent.context))

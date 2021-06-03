@@ -1,5 +1,6 @@
 package edu.uw.myapplication.`interface`
 
+import edu.uw.myapplication.model.EvolutionChain
 import edu.uw.myapplication.model.Pokemon
 import edu.uw.myapplication.model.PokemonList
 import edu.uw.myapplication.model.PokemonSpecies
@@ -23,4 +24,9 @@ interface PokemonService {
     suspend fun getPokemonList(
         @Query("limit") limit: Int
     ): PokemonList
+
+    @GET("evolution-chain/{id}")
+    suspend fun getEvolutionChain(
+        @Path("id") id: Int
+    ): EvolutionChain
 }

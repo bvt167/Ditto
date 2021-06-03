@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,10 +12,12 @@ import coil.load
 import edu.uw.myapplication.DittoApplication
 import edu.uw.myapplication.NavGraphDirections
 import edu.uw.myapplication.R
-import edu.uw.myapplication.adapter.TypeRecyclerAdapter
+import edu.uw.myapplication.adapter.EvolutionAdapter
+import edu.uw.myapplication.adapter.TypeAdapter
 import edu.uw.myapplication.databinding.ActivityPokemonDetailBinding
+import edu.uw.myapplication.model.Chain
+import edu.uw.myapplication.model.EvolutionList
 import edu.uw.myapplication.model.Pokemon
-import edu.uw.myapplication.repository.DataRepository
 import kotlinx.coroutines.launch
 
 const val POKEMON_NAME_KEY = "POKEMON_NAME_KEY"
@@ -66,7 +67,7 @@ class PokemonDetailActivity : AppCompatActivity() {
                 tvPokemonName.text = capitalizeWords(pokemon.forms[0].name)
                 clContainer.setBackgroundColor(application.getTypeColorByName(pokemon.types.first().type.name))
                 rvTypes.layoutManager = LinearLayoutManager(this@PokemonDetailActivity, LinearLayoutManager.HORIZONTAL, false)
-                val adapter = TypeRecyclerAdapter(pokemon.types, application)
+                val adapter = TypeAdapter(pokemon.types, application)
                 rvTypes.adapter = adapter
             }
         }
@@ -82,14 +83,37 @@ class PokemonDetailActivity : AppCompatActivity() {
                 navController.navigate(NavGraphDirections.actionGlobalStatsFragment(pokemon))
             }
 
-            rbEvolutions.setOnClickListener {
-                navController.navigate(NavGraphDirections.actionGlobalEvolutionsFragment(pokemon))
+            var listOfPokemon: List<Pokemon> = listOf()
+            lifecycleScope.launch {
+                val pokemonSpecies = dataRepository.getPokemonSpecies(pokemon.name)
+                val evolutionChain = dataRepository.getEvolutionChain(extractIdFromUrl(pokemonSpecies.evolution_chain.url))
+                listOfPokemon += dataRepository.getPokemon(evolutionChain.chain.species.name)
+
+                evolutionChain.chain.evolves_to.forEach {
+                    var currChain = it
+                    listOfPokemon += dataRepository.getPokemon(currChain.species.name)
+                    while (currChain.evolves_to.isNotEmpty()) {
+                        currChain = currChain.evolves_to.first()
+                        listOfPokemon += dataRepository.getPokemon(currChain.species.name)
+                    }
+                }
+
+                rbEvolutions.setOnClickListener {
+                    navController.navigate(NavGraphDirections.actionGlobalEvolutionsFragment(pokemon, EvolutionList(listOfPokemon), evolutionChain))
+                }
             }
 
             rbMoves.setOnClickListener {
                 navController.navigate(NavGraphDirections.actionGlobalMovesFragment(pokemon))
             }
         }
+    }
+
+    private fun extractIdFromUrl(url: String): Int {
+        val idPrefix = "https://pokeapi.co/api/v2/evolution-chain/"
+        val size = url.length
+        val stringID = url.substring(idPrefix.length, size - 1)
+        return stringID.toInt()
     }
 
     private fun capitalizeWords(s: String): String = s.split(" ").joinToString { it.replaceFirstChar { it.uppercaseChar() } }
