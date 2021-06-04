@@ -21,7 +21,6 @@ class MoveAdapter(private val moves: List<Move>, private val pokemon: Pokemon, v
     }
 
     override fun onBindViewHolder(holder: MoveListViewHolder, position: Int) {
-        Log.i("wtf", moves[position].name)
         val currentMove = moves[position]
         val currentMoveEntry = pokemon.moves.first { it.move.name == currentMove.name }
         val levelLearned = currentMoveEntry.version_group_details.last().level_learned_at

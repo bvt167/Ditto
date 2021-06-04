@@ -37,7 +37,7 @@ class AboutFragment : Fragment() {
             lifecycleScope.launch {
                 val pokemonSpecies = dataRepository.getPokemonSpecies(pokemon.name)
                 with(binding) {
-                    tvFlavorText.text = getLatestEnglishFlavorText(pokemonSpecies.flavor_text_entries)
+                    tvFlavorText.text = getLatestEnglishFlavorText(pokemonSpecies.flavor_text_entries).replace('\n', ' ', true)
                     tvHeight.text = (pokemon.height * 10).toString() + " cm"
                     tvWeight.text = (pokemon.weight / 10.0).round(3).toString() + " kg"
                     tvAbilities.text = capitalizeWords(pokemon.abilities.joinToString { it.ability.name })
