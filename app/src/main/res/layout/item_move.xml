@@ -112,6 +112,7 @@
             android:layout_width="@dimen/default_width"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:paddingLeft="2dp"
             android:text="0"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -19,7 +19,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMoves"
         android:visibility="gone"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/default_width"
         android:layout_height="265dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_move"
