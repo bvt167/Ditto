@@ -1,10 +1,7 @@
 package edu.uw.myapplication.repository
 
 import edu.uw.myapplication.`interface`.PokemonService
-import edu.uw.myapplication.model.EvolutionChain
-import edu.uw.myapplication.model.Pokemon
-import edu.uw.myapplication.model.PokemonList
-import edu.uw.myapplication.model.PokemonSpecies
+import edu.uw.myapplication.model.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -28,5 +25,6 @@ class DataRepository {
     suspend fun getPokemonSpecies(name: String): PokemonSpecies = pokemonService.getPokemonSpecies(name)
     suspend fun getPokemonList(numPokemonLimit: Int = DEFAULT_NUM_POKEMON_LIMIT): PokemonList = pokemonService.getPokemonList(numPokemonLimit)
     suspend fun getEvolutionChain(id: Int): EvolutionChain = pokemonService.getEvolutionChain(id)
+    suspend fun getMove(id: Int): Move = pokemonService.getMove(id)
 
 }

@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class EvolutionChain(
-    val id: Int,
-    val chain: Chain
+data class VersionGroup(
+    val name: String,
+    val url: String
 ): Parcelable

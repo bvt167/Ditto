@@ -11,6 +11,7 @@ data class Pokemon(
     val weight: Int,
     val forms: List<Form>,
     val abilities: List<AbilityEntry>,
+    val moves: List<MovesEntry>,
     val sprites: Sprites,
     val stats: List<StatEntry>,
     val types: List<TypeEntry>

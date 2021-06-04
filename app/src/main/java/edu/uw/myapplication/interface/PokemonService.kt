@@ -1,9 +1,6 @@
 package edu.uw.myapplication.`interface`
 
-import edu.uw.myapplication.model.EvolutionChain
-import edu.uw.myapplication.model.Pokemon
-import edu.uw.myapplication.model.PokemonList
-import edu.uw.myapplication.model.PokemonSpecies
+import edu.uw.myapplication.model.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -29,4 +26,9 @@ interface PokemonService {
     suspend fun getEvolutionChain(
         @Path("id") id: Int
     ): EvolutionChain
+
+    @GET("move/{id}")
+    suspend fun getMove(
+        @Path("id") id: Int
+    ): Move
 }

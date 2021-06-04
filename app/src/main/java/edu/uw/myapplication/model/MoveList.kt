@@ -4,7 +4,6 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class EvolutionChain(
-    val id: Int,
-    val chain: Chain
+data class MoveList(
+    val moves: List<Move>
 ): Parcelable

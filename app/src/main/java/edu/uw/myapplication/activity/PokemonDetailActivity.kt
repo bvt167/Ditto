@@ -15,12 +15,12 @@ import edu.uw.myapplication.R
 import edu.uw.myapplication.adapter.EvolutionAdapter
 import edu.uw.myapplication.adapter.TypeAdapter
 import edu.uw.myapplication.databinding.ActivityPokemonDetailBinding
-import edu.uw.myapplication.model.Chain
-import edu.uw.myapplication.model.EvolutionList
-import edu.uw.myapplication.model.Pokemon
+import edu.uw.myapplication.model.*
 import kotlinx.coroutines.launch
 
 const val POKEMON_NAME_KEY = "POKEMON_NAME_KEY"
+private const val EVOLUTION_CHAIN_URL_PREFIX = "https://pokeapi.co/api/v2/evolution-chain/"
+private const val MOVE_URL_PREFIX = "https://pokeapi.co/api/v2/move/"
 
 fun navigateToPokemonDetailActivity(context: Context, pokemonName: String) = with(context) {
     val intent = Intent(this, PokemonDetailActivity::class.java).apply {
@@ -83,10 +83,20 @@ class PokemonDetailActivity : AppCompatActivity() {
                 navController.navigate(NavGraphDirections.actionGlobalStatsFragment(pokemon))
             }
 
+            setEvolutionsFragmentNavigation(pokemon)
+
+            rbMoves.setOnClickListener {
+                navController.navigate(edu.uw.myapplication.NavGraphDirections.actionGlobalMovesFragment(pokemon))
+            }
+        }
+    }
+
+    private fun setEvolutionsFragmentNavigation(pokemon: Pokemon) {
+        with(binding) {
             var listOfPokemon: List<Pokemon> = listOf()
             lifecycleScope.launch {
                 val pokemonSpecies = dataRepository.getPokemonSpecies(pokemon.name)
-                val evolutionChain = dataRepository.getEvolutionChain(extractIdFromUrl(pokemonSpecies.evolution_chain.url))
+                val evolutionChain = dataRepository.getEvolutionChain(extractIdFromUrl(pokemonSpecies.evolution_chain.url, EVOLUTION_CHAIN_URL_PREFIX))
                 listOfPokemon += dataRepository.getPokemon(evolutionChain.chain.species.name)
 
                 evolutionChain.chain.evolves_to.forEach {
@@ -102,15 +112,10 @@ class PokemonDetailActivity : AppCompatActivity() {
                     navController.navigate(NavGraphDirections.actionGlobalEvolutionsFragment(pokemon, EvolutionList(listOfPokemon), evolutionChain))
                 }
             }
-
-            rbMoves.setOnClickListener {
-                navController.navigate(NavGraphDirections.actionGlobalMovesFragment(pokemon))
-            }
         }
     }
 
-    private fun extractIdFromUrl(url: String): Int {
-        val idPrefix = "https://pokeapi.co/api/v2/evolution-chain/"
+    private fun extractIdFromUrl(url: String, idPrefix: String): Int {
         val size = url.length
         val stringID = url.substring(idPrefix.length, size - 1)
         return stringID.toInt()
