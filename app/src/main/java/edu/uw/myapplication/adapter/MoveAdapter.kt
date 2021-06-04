@@ -16,7 +16,7 @@ import java.util.*
 class MoveAdapter(private val moves: List<Move>, private val pokemon: Pokemon, val application: DittoApplication): RecyclerView.Adapter<MoveAdapter.MoveListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoveListViewHolder {
-        val binding = ItemMoveBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = ItemMoveBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MoveListViewHolder(binding)
     }
 
