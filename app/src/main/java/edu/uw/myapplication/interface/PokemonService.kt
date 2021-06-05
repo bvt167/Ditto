@@ -2,6 +2,8 @@ package edu.uw.myapplication.`interface`
 
 import edu.uw.myapplication.model.Pokemon
 import edu.uw.myapplication.model.PokemonList
+import edu.uw.myapplication.model.Species
+import edu.uw.myapplication.model.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -13,8 +15,27 @@ interface PokemonService {
         @Path("name") name: String
     ): Pokemon
 
+    @GET("pokemon-species/{name}")
+    suspend fun getPokemonSpecies(
+        @Path("name") name: String
+    ): PokemonSpecies
+
     @GET("pokemon/")
     suspend fun getPokemonList(
         @Query("limit") limit: Int
     ): PokemonList
+
+    @GET("pokemon-species/{name}")
+    suspend fun getPokemonHints(
+        @Path("name") name: String
+    ): Species
+    @GET("evolution-chain/{id}")
+    suspend fun getEvolutionChain(
+        @Path("id") id: Int
+    ): EvolutionChain
+
+    @GET("move/{id}")
+    suspend fun getMove(
+        @Path("id") id: Int
+    ): Move
 }

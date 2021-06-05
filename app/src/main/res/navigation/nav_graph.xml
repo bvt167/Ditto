@@ -22,11 +22,13 @@
         tools:layout="@layout/fragment_about" >
         <argument
             android:name="pokemon"
-            app:argType="edu.uw.myapplication.model.Pokemon" />
+            app:argType="edu.uw.myapplication.model.Pokemon"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/statsFragment"
-        android:name="edu.uw.myapplication.StatsFragment"
+        android:name="edu.uw.myapplication.fragment.StatsFragment"
         android:label="fragment_stats"
         tools:layout="@layout/fragment_stats" >
         <argument
@@ -35,20 +37,37 @@
     </fragment>
     <fragment
         android:id="@+id/evolutionsFragment"
-        android:name="edu.uw.myapplication.EvolutionsFragment"
+        android:name="edu.uw.myapplication.fragment.EvolutionsFragment"
         android:label="fragment_evolutions"
         tools:layout="@layout/fragment_evolutions" >
         <argument
             android:name="pokemon"
             app:argType="edu.uw.myapplication.model.Pokemon" />
+        <argument
+            android:name="evolutionList"
+            app:argType="edu.uw.myapplication.model.EvolutionList" />
+        <argument
+            android:name="evolutionChain"
+            app:argType="edu.uw.myapplication.model.EvolutionChain" />
     </fragment>
     <fragment
         android:id="@+id/movesFragment"
-        android:name="edu.uw.myapplication.MovesFragment"
+        android:name="edu.uw.myapplication.fragment.MovesFragment"
         android:label="fragment_moves"
         tools:layout="@layout/fragment_moves" >
         <argument
             android:name="pokemon"
             app:argType="edu.uw.myapplication.model.Pokemon" />
     </fragment>
+
+    <action
+        android:id="@+id/action_global_statsFragment"
+        app:destination="@id/statsFragment" />
+    <action
+        android:id="@+id/action_global_movesFragment"
+        app:destination="@id/movesFragment" />
+    <action
+        android:id="@+id/action_global_evolutionsFragment"
+        app:destination="@id/evolutionsFragment" />
+
 </navigation>

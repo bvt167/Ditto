@@ -3,6 +3,7 @@ package edu.uw.myapplication.repository
 import edu.uw.myapplication.`interface`.PokemonService
 import edu.uw.myapplication.model.Pokemon
 import edu.uw.myapplication.model.PokemonList
+import edu.uw.myapplication.model.Species
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -22,6 +23,11 @@ class DataRepository {
         .build()
         .create(PokemonService::class.java)
 
+    suspend fun getPokemonHint(name: String): Species = pokemonService.getPokemonHints(name)
     suspend fun getPokemon(name: String): Pokemon = pokemonService.getPokemon(name)
+    suspend fun getPokemonSpecies(name: String): PokemonSpecies = pokemonService.getPokemonSpecies(name)
     suspend fun getPokemonList(numPokemonLimit: Int = DEFAULT_NUM_POKEMON_LIMIT): PokemonList = pokemonService.getPokemonList(numPokemonLimit)
+    suspend fun getEvolutionChain(id: Int): EvolutionChain = pokemonService.getEvolutionChain(id)
+    suspend fun getMove(id: Int): Move = pokemonService.getMove(id)
+
 }
