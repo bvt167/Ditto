@@ -10,7 +10,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import edu.uw.myapplication.DittoApplication
-import edu.uw.myapplication.NavGraphDirections
 import edu.uw.myapplication.R
 import edu.uw.myapplication.adapter.EvolutionAdapter
 import edu.uw.myapplication.adapter.TypeAdapter

@@ -1,12 +1,16 @@
 package edu.uw.myapplication.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import edu.uw.myapplication.BuildConfig
+import edu.uw.myapplication.activity.POKEMON_NAME_KEY
+import edu.uw.myapplication.activity.PokemonDetailActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import edu.uw.myapplication.DittoApplication
@@ -16,8 +20,18 @@ import edu.uw.myapplication.repository.DataRepository
 import kotlinx.coroutines.launch
 import kotlin.math.round
 
+
 class AboutFragment : Fragment() {
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding = FragmentAboutBinding.inflate(layoutInflater)
+        with(binding) {
+            versionOf.text = BuildConfig.VERSION_NAME
+        }
     private lateinit var binding: FragmentAboutBinding
     private val safeArgs: AboutFragmentArgs by navArgs()
     private lateinit var application: DittoApplication
