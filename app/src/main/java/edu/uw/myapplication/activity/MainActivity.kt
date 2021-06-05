@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
                 lifecycleScope.launch {
                     navigateToPokemonDetailActivity(this@MainActivity, name)
                 }
+
+                binding.guessBtn.setOnClickListener {
+                    navigateToGuessingGameActivity(this@MainActivity)
+                }
             }
         }
 
